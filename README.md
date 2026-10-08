@@ -31,6 +31,13 @@ npm install
 ```bash
 npm run dev
 ```
+The server should start at:
+
+http://localhost:3000
+
+You should see:
+
+Server running on http://localhost:3000
 
 ## API
 
