@@ -1,0 +1,75 @@
+openapi: 3.0.3
+
+info:
+  title: AI Developer Experience Lab API
+  description: A small API used to explore API documentation and developer experience.
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit/
+
+security:
+  - {}
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /hello:
+    get:
+      operationId: getHello
+      summary: Get a developer greeting
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hello, Developer!
+
+                    
+
+    post:
+      operationId: createHello
+      summary: Create a personalized greeting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: Virginia
+
+                  
+
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hello, Virginia!
+
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Name is required

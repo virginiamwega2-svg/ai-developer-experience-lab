@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# TypeScript build output
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map
