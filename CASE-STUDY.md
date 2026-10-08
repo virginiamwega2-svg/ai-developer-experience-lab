@@ -8,13 +8,13 @@ The goal of this project was to build a working API and evaluate the experience 
 
 Rather than only checking whether the code worked, I wanted to test whether another developer could:
 
-- Set up the project successfully
-- Start the development server
-- Understand how to use the API
-- Follow the documented examples
-- Understand validation errors
-- Troubleshoot common problems
-- Verify expected behavior through tests
+* Set up the project successfully
+* Start the development server
+* Understand how to use the API
+* Follow the documented examples
+* Understand validation errors
+* Troubleshoot common problems
+* Verify expected behavior through tests
 
 The project became an opportunity to identify developer friction, improve the experience, and document the changes with evidence.
 
@@ -30,7 +30,9 @@ During this process, I found several points of friction.
 
 The README instructed developers to run:
 
+```bash
 npm run dev
+```
 
 However, the project did not initially have a `dev` script configured.
 
@@ -50,13 +52,17 @@ I also tested what happened when a developer sent an incomplete request.
 
 For example:
 
+```json
 {}
+```
 
 The API returned:
 
+```json
 {
   "error": "Name is required"
 }
+```
 
 This confirmed that validation errors were an important part of the developer experience and needed to be documented and tested.
 
@@ -68,15 +74,17 @@ I added automated tests covering successful and invalid requests.
 
 The final test suite covered four scenarios:
 
-- Successful GET request
-- Successful POST request
-- Invalid `name` value
-- Missing `name` value
+* Successful GET request
+* Successful POST request
+* Invalid `name` value
+* Missing `name` value
 
 The result was:
 
+```text
 Test Files  1 passed
 Tests       4 passed
+```
 
 ## Fixes & Improvements
 
@@ -93,6 +101,39 @@ I added `tsx` and configured the project with a development script:
     "test": "vitest"
   }
 }
+```
+
+This allowed developers to start the application using the same command documented in the README.
+
+### Fix 2: Improved API examples for PowerShell
+
+I replaced the Unix-style `curl` example with a PowerShell-friendly request:
+
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/hello" -Method Post -ContentType "application/json" -Body '{"name":"Virginia"}'
+```
+
+This made the documented example match the environment I was using to test the project.
+
+### Fix 3: Documented validation behavior
+
+I documented the expected validation behavior for invalid and missing `name` values.
+
+For example:
+
+```json
+{
+  "error": "Name is required"
+}
+```
+
+This gives developers a clear indication of what went wrong and what the API expects.
+
+### Fix 4: Added automated API tests
+
+I added automated tests using Vitest and Supertest to verify both successful and invalid requests.
+
+The final test suite contains four tests covering the documented API behavior.
 
 ## Evidence & Verification
 
@@ -104,6 +145,37 @@ Running:
 
 ```bash
 npm run dev
+```
+
+starts the development server successfully.
+
+The server starts at:
+
+```text
+http://localhost:3000
+```
+
+I also tested the documented API examples and verified that the API behaved as described.
+
+### Test verification
+
+The automated test suite passed all four tests:
+
+```text
+Test Files  1 passed
+Tests       4 passed
+```
+
+### Documentation verification
+
+I compared the documentation against the running application to verify that:
+
+* The documented development command works.
+* The documented API endpoints exist.
+* The request examples match the expected request format.
+* The documented responses match actual API behavior.
+* Validation errors match the implementation.
+* The troubleshooting guidance reflects problems encountered during testing.
 
 ## Outcome
 
@@ -111,20 +183,21 @@ The project now provides a more reliable developer journey from setup to success
 
 The main improvements were:
 
-- The documented development command now works.
-- The API examples work in the environment I used to test them.
-- Validation behavior is clearly documented.
-- Common setup and usage problems have troubleshooting guidance.
-- API behavior is covered by automated tests.
-- Documentation has been verified against the running application.
+* The documented development command now works.
+* The API examples work in the environment I used to test them.
+* Validation behavior is clearly documented.
+* Common setup and usage problems have troubleshooting guidance.
+* API behavior is covered by automated tests.
+* Documentation has been verified against the running application.
 
 The project also now contains evidence of the development and documentation process through:
 
-- `DEVEX-AUDIT.md`
-- `TROUBLESHOOTING.md`
-- Automated API tests
-- Verified API examples
-- This case study
+* `DEVEX-AUDIT.md`
+* `TROUBLESHOOTING.md`
+* Automated API tests
+* Verified API examples
+* OpenAPI documentation
+* This case study
 
 ## Lessons Learned
 
@@ -184,13 +257,13 @@ I documented the API using the OpenAPI Specification and validated the specifica
 
 The OpenAPI definition documents:
 
-- GET `/hello`
-- POST `/hello`
-- Request body requirements
-- Successful responses
-- Validation errors
-- Operation IDs
-- Local development server
+* GET `/hello`
+* POST `/hello`
+* Request body requirements
+* Successful responses
+* Validation errors
+* Operation IDs
+* Local development server
 
 Redocly validation confirmed that the OpenAPI specification is valid.
 
@@ -200,7 +273,8 @@ One Redocly warning remains for the localhost server URL because the API current
 
 ### Evidence
 
-- `openapi.yaml` — machine-readable API specification
-- `redocly.yaml` — documentation tooling configuration
-- Redocly CLI validation
-- Interactive API documentation preview
+* `openapi.yaml` — machine-readable API specification
+* `redocly.yaml` — documentation tooling configuration
+* Redocly CLI validation
+* Interactive API documentation preview
+* GitHub Actions CI validation
