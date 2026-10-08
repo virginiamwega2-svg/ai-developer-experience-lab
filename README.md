@@ -186,3 +186,7 @@ The current test suite verifies:
 This project treats API behavior as part of Developer Experience.
 
 The goal is to make APIs easier to understand, test, integrate, and troubleshoot through clear documentation and predictable behavior.
+
+### API validation
+
+The OpenAPI specification is automatically validated with Redocly in GitHub Actions whenever changes are pushed or a pull request is opened.
